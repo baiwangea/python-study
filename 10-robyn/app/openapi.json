@@ -1,0 +1,606 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Robyn PostgreSQL API",
+    "description": "一个使用 Robyn 构建的高性能 REST API，集成 PostgreSQL",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "本地开发服务器"
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth",
+      "description": "认证相关接口"
+    },
+    {
+      "name": "users",
+      "description": "用户管理接口"
+    },
+    {
+      "name": "items",
+      "description": "项目管理接口"
+    },
+    {
+      "name": "health",
+      "description": "健康检查"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["health"],
+        "summary": "健康检查",
+        "description": "检查服务状态和数据库连接",
+        "responses": {
+          "200": {
+            "description": "服务正常",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {"type": "string", "example": "healthy"},
+                    "timestamp": {"type": "string", "format": "date-time"},
+                    "database": {"type": "boolean"},
+                    "service": {"type": "string"},
+                    "version": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "用户注册",
+        "description": "注册新用户并返回访问令牌",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "email", "password"],
+                "properties": {
+                  "username": {"type": "string", "minLength": 3, "maxLength": 50, "example": "testuser"},
+                  "email": {"type": "string", "format": "email", "example": "test@example.com"},
+                  "password": {"type": "string", "minLength": 8, "example": "password123"},
+                  "full_name": {"type": "string", "example": "Test User"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "注册成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {"type": "string"},
+                    "token_type": {"type": "string", "example": "bearer"},
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {"type": "integer"},
+                        "username": {"type": "string"},
+                        "email": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "用户登录",
+        "description": "用户登录并返回访问令牌",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password"],
+                "properties": {
+                  "username": {"type": "string", "example": "testuser"},
+                  "password": {"type": "string", "example": "password123"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "登录成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {"type": "string"},
+                    "token_type": {"type": "string", "example": "bearer"},
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {"type": "integer"},
+                        "username": {"type": "string"},
+                        "email": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "认证失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {"type": "string", "example": "Invalid credentials"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/": {
+      "get": {
+        "tags": ["users"],
+        "summary": "获取用户列表",
+        "description": "分页获取用户列表",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "跳过的记录数",
+            "schema": {"type": "integer", "default": 0}
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "返回的记录数",
+            "schema": {"type": "integer", "default": 100, "maximum": 100}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "username": {"type": "string"},
+                          "email": {"type": "string"},
+                          "is_active": {"type": "boolean"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["users"],
+        "summary": "创建用户",
+        "description": "创建新用户",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "email", "password"],
+                "properties": {
+                  "username": {"type": "string", "minLength": 3, "maxLength": 50},
+                  "email": {"type": "string", "format": "email"},
+                  "password": {"type": "string", "minLength": 8},
+                  "full_name": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "integer"},
+                    "username": {"type": "string"},
+                    "email": {"type": "string"},
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求错误"
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}": {
+      "get": {
+        "tags": ["users"],
+        "summary": "获取用户详情",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "integer"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "integer"},
+                    "username": {"type": "string"},
+                    "email": {"type": "string"},
+                    "full_name": {"type": "string"},
+                    "is_active": {"type": "boolean"},
+                    "created_at": {"type": "string", "format": "date-time"}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "用户不存在"
+          }
+        }
+      },
+      "put": {
+        "tags": ["users"],
+        "summary": "更新用户",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "integer"}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {"type": "string", "format": "email"},
+                  "full_name": {"type": "string"},
+                  "is_active": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功"
+          },
+          "404": {
+            "description": "用户不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["users"],
+        "summary": "删除用户",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "integer"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "删除成功"
+          },
+          "404": {
+            "description": "用户不存在"
+          }
+        }
+      }
+    },
+    "/api/items/": {
+      "get": {
+        "tags": ["items"],
+        "summary": "获取项目列表",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "schema": {"type": "integer", "default": 0}
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {"type": "integer", "default": 100}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "title": {"type": "string"},
+                          "description": {"type": "string"},
+                          "price": {"type": "string"},
+                          "owner_id": {"type": "integer"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["items"],
+        "summary": "创建项目",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "price"],
+                "properties": {
+                  "title": {"type": "string", "minLength": 1, "maxLength": 100},
+                  "description": {"type": "string"},
+                  "price": {"type": "string", "pattern": "^[0-9]+\\.[0-9]{2}$"},
+                  "owner_id": {"type": "integer", "default": 1}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功"
+          },
+          "400": {
+            "description": "请求错误"
+          }
+        }
+      }
+    },
+    "/api/items/{item_id}": {
+      "get": {
+        "tags": ["items"],
+        "summary": "获取项目详情",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "integer"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "404": {
+            "description": "项目不存在"
+          }
+        }
+      },
+      "put": {
+        "tags": ["items"],
+        "summary": "更新项目",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "integer"}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "price": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功"
+          },
+          "404": {
+            "description": "项目不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["items"],
+        "summary": "删除项目",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "integer"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "删除成功"
+          },
+          "404": {
+            "description": "项目不存在"
+          }
+        }
+      }
+    },
+    "/api/items/search": {
+      "get": {
+        "tags": ["items"],
+        "summary": "搜索项目",
+        "description": "支持分页、排序和过滤的项目搜索",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {"type": "integer", "default": 1, "minimum": 1}
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {"type": "integer", "default": 10, "minimum": 1, "maximum": 100}
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {"type": "string"},
+            "description": "搜索关键词（标题或描述）"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {"type": "string", "enum": ["title", "price", "created_at"]}
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "schema": {"type": "string", "enum": ["asc", "desc"], "default": "asc"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "title": {"type": "string"},
+                          "description": {"type": "string"},
+                          "price": {"type": "string"},
+                          "owner_id": {"type": "integer"}
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "total": {"type": "integer"},
+                        "page": {"type": "integer"},
+                        "size": {"type": "integer"},
+                        "pages": {"type": "integer"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
+

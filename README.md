@@ -8,6 +8,17 @@
 
 ---
 
+## 零、Conda 常用操作
+- **创建环境**: `conda create -n <env_name> python=3.x`
+- **激活环境**: `conda activate <env_name>`
+- **退出环境**: `conda deactivate`
+- **查看所有环境**: `conda env list`
+- **安装包**: `conda install <package_name>`
+- **查看已安装的包**: `conda list`
+- **删除环境**: `conda env remove -n <env_name>`
+
+---
+
 ## 一、标准库部分
 ### 并发与异步
 - asyncio（异步编程）
