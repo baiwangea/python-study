@@ -1,0 +1,116 @@
+2026-06-16 22:57:06 - api_client - INFO - 成功加载配置文件: /Users/cluo/code/py/python-study/12-excel/data/api_config.xlsx
+2026-06-16 22:57:06 - api_client - INFO - 包含工作表: ['API接口配置', '请求参数配置', '认证信息配置', '环境配置', '日志配置']
+2026-06-16 22:57:06 - api_client - DEBUG - 工作表 'API接口配置' 读取了 7 行数据
+2026-06-16 22:57:06 - api_client - INFO - 读取了 7 个API端点配置
+2026-06-16 22:57:06 - api_client - DEBUG - 工作表 '请求参数配置' 读取了 11 行数据
+2026-06-16 22:57:06 - api_client - INFO - 读取了 11 个参数配置
+2026-06-16 22:57:06 - api_client - DEBUG - 工作表 '认证信息配置' 读取了 4 行数据
+2026-06-16 22:57:06 - api_client - INFO - 读取了 4 个认证配置
+2026-06-16 22:57:06 - api_client - DEBUG - 工作表 '环境配置' 读取了 8 行数据
+2026-06-16 22:57:06 - api_client - INFO - 读取了 8 个环境配置
+2026-06-16 22:57:06 - api_client - DEBUG - 工作表 '日志配置' 读取了 10 行数据
+2026-06-16 22:57:06 - api_client - INFO - 日志配置读取成功
+2026-06-16 22:57:06 - api_client - INFO - ============================================================
+2026-06-16 22:57:06 - api_client - INFO - 配置加载完成
+2026-06-16 22:57:06 - api_client - INFO -   当前环境: dev
+2026-06-16 22:57:06 - api_client - INFO -   API端点数: 7
+2026-06-16 22:57:06 - api_client - INFO -   参数配置数: 11
+2026-06-16 22:57:06 - api_client - INFO -   认证配置数: 4
+2026-06-16 22:57:06 - api_client - INFO -   环境配置数: 8
+2026-06-16 22:57:06 - api_client - INFO -   启用端点: 6
+2026-06-16 22:57:06 - api_client - INFO - ============================================================
+2026-06-16 22:57:06 - api_client - INFO - Excel工作簿已关闭
+2026-06-16 22:57:06 - api_client - INFO - API客户端初始化完成
+2026-06-16 22:57:06 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users?page=1&limit=5
+2026-06-16 22:57:12 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users/1
+2026-06-16 22:57:12 - api_client - DEBUG - 请求构建完成: POST https://jsonplaceholder.typicode.com/users
+2026-06-16 22:57:13 - api_client - DEBUG - 请求构建完成: PUT https://jsonplaceholder.typicode.com/users/1
+2026-06-16 22:57:14 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/posts
+2026-06-16 22:57:15 - api_client - INFO - API客户端会话已关闭
+2026-06-16 23:39:22 - api_client - INFO - 成功加载配置文件: /Users/cluo/code/py/python-study/12-excel/data/api_config.xlsx
+2026-06-16 23:39:22 - api_client - INFO - 包含工作表: ['API接口配置', '请求参数配置', '认证信息配置', '环境配置', '日志配置']
+2026-06-16 23:39:22 - api_client - DEBUG - 工作表 'API接口配置' 读取了 7 行数据
+2026-06-16 23:39:22 - api_client - INFO - 读取了 7 个API端点配置
+2026-06-16 23:39:22 - api_client - DEBUG - 工作表 '请求参数配置' 读取了 11 行数据
+2026-06-16 23:39:22 - api_client - INFO - 读取了 11 个参数配置
+2026-06-16 23:39:22 - api_client - DEBUG - 工作表 '认证信息配置' 读取了 4 行数据
+2026-06-16 23:39:22 - api_client - INFO - 读取了 4 个认证配置
+2026-06-16 23:39:22 - api_client - DEBUG - 工作表 '环境配置' 读取了 8 行数据
+2026-06-16 23:39:22 - api_client - INFO - 读取了 8 个环境配置
+2026-06-16 23:39:22 - api_client - DEBUG - 工作表 '日志配置' 读取了 10 行数据
+2026-06-16 23:39:22 - api_client - INFO - 日志配置读取成功
+2026-06-16 23:39:22 - api_client - INFO - ============================================================
+2026-06-16 23:39:22 - api_client - INFO - 配置加载完成
+2026-06-16 23:39:22 - api_client - INFO -   当前环境: dev
+2026-06-16 23:39:22 - api_client - INFO -   API端点数: 7
+2026-06-16 23:39:22 - api_client - INFO -   参数配置数: 11
+2026-06-16 23:39:22 - api_client - INFO -   认证配置数: 4
+2026-06-16 23:39:22 - api_client - INFO -   环境配置数: 8
+2026-06-16 23:39:22 - api_client - INFO -   启用端点: 6
+2026-06-16 23:39:22 - api_client - INFO - ============================================================
+2026-06-16 23:39:22 - api_client - INFO - Excel工作簿已关闭
+2026-06-16 23:39:22 - api_client - INFO - API客户端初始化完成
+2026-06-16 23:39:22 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users?page=1&limit=5
+2026-06-16 23:39:26 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users/1
+2026-06-16 23:39:26 - api_client - DEBUG - 请求构建完成: POST https://jsonplaceholder.typicode.com/users
+2026-06-16 23:39:27 - api_client - DEBUG - 请求构建完成: PUT https://jsonplaceholder.typicode.com/users/1
+2026-06-16 23:39:28 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/posts
+2026-06-16 23:39:28 - api_client - INFO - API客户端会话已关闭
+2026-06-16 23:42:46 - api_client - INFO - 成功加载配置文件: /Users/cluo/code/py/python-study/12-excel/data/api_config.xlsx
+2026-06-16 23:42:46 - api_client - INFO - 包含工作表: ['API接口配置', '请求参数配置', '认证信息配置', '环境配置', '日志配置']
+2026-06-16 23:42:46 - api_client - DEBUG - 工作表 'API接口配置' 读取了 7 行数据
+2026-06-16 23:42:46 - api_client - INFO - 读取了 7 个API端点配置
+2026-06-16 23:42:46 - api_client - DEBUG - 工作表 '请求参数配置' 读取了 11 行数据
+2026-06-16 23:42:46 - api_client - INFO - 读取了 11 个参数配置
+2026-06-16 23:42:46 - api_client - DEBUG - 工作表 '认证信息配置' 读取了 4 行数据
+2026-06-16 23:42:46 - api_client - INFO - 读取了 4 个认证配置
+2026-06-16 23:42:46 - api_client - DEBUG - 工作表 '环境配置' 读取了 8 行数据
+2026-06-16 23:42:46 - api_client - INFO - 读取了 8 个环境配置
+2026-06-16 23:42:46 - api_client - DEBUG - 工作表 '日志配置' 读取了 10 行数据
+2026-06-16 23:42:46 - api_client - INFO - 日志配置读取成功
+2026-06-16 23:42:46 - api_client - INFO - ============================================================
+2026-06-16 23:42:46 - api_client - INFO - 配置加载完成
+2026-06-16 23:42:46 - api_client - INFO -   当前环境: dev
+2026-06-16 23:42:46 - api_client - INFO -   API端点数: 7
+2026-06-16 23:42:46 - api_client - INFO -   参数配置数: 11
+2026-06-16 23:42:46 - api_client - INFO -   认证配置数: 4
+2026-06-16 23:42:46 - api_client - INFO -   环境配置数: 8
+2026-06-16 23:42:46 - api_client - INFO -   启用端点: 6
+2026-06-16 23:42:46 - api_client - INFO - ============================================================
+2026-06-16 23:42:46 - api_client - INFO - Excel工作簿已关闭
+2026-06-16 23:42:46 - api_client - INFO - API客户端初始化完成
+2026-06-16 23:42:46 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users?page=1&limit=5
+2026-06-16 23:42:49 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users/1
+2026-06-16 23:42:49 - api_client - DEBUG - 请求构建完成: POST https://jsonplaceholder.typicode.com/users
+2026-06-16 23:42:51 - api_client - DEBUG - 请求构建完成: PUT https://jsonplaceholder.typicode.com/users/1
+2026-06-16 23:42:52 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/posts
+2026-06-16 23:42:53 - api_client - INFO - API客户端会话已关闭
+2026-06-17 02:26:59 - api_client - INFO - 成功加载配置文件: /Users/cluo/code/py/python-study/12-excel/data/api_config.xlsx
+2026-06-17 02:26:59 - api_client - INFO - 包含工作表: ['API接口配置', '请求参数配置', '认证信息配置', '环境配置', '日志配置', '请求响应日志']
+2026-06-17 02:26:59 - api_client - DEBUG - 工作表 'API接口配置' 读取了 7 行数据
+2026-06-17 02:26:59 - api_client - INFO - 读取了 7 个API端点配置
+2026-06-17 02:26:59 - api_client - DEBUG - 工作表 '请求参数配置' 读取了 11 行数据
+2026-06-17 02:26:59 - api_client - INFO - 读取了 11 个参数配置
+2026-06-17 02:26:59 - api_client - DEBUG - 工作表 '认证信息配置' 读取了 4 行数据
+2026-06-17 02:26:59 - api_client - INFO - 读取了 4 个认证配置
+2026-06-17 02:26:59 - api_client - DEBUG - 工作表 '环境配置' 读取了 9 行数据
+2026-06-17 02:26:59 - api_client - INFO - 读取了 9 个环境配置
+2026-06-17 02:26:59 - api_client - DEBUG - 工作表 '日志配置' 读取了 13 行数据
+2026-06-17 02:26:59 - api_client - INFO - 日志配置读取成功
+2026-06-17 02:26:59 - api_client - INFO - ============================================================
+2026-06-17 02:26:59 - api_client - INFO - 配置加载完成
+2026-06-17 02:26:59 - api_client - INFO -   当前环境: dev
+2026-06-17 02:26:59 - api_client - INFO -   API端点数: 7
+2026-06-17 02:26:59 - api_client - INFO -   参数配置数: 11
+2026-06-17 02:26:59 - api_client - INFO -   认证配置数: 4
+2026-06-17 02:26:59 - api_client - INFO -   环境配置数: 9
+2026-06-17 02:26:59 - api_client - INFO -   启用端点: 6
+2026-06-17 02:26:59 - api_client - INFO - ============================================================
+2026-06-17 02:26:59 - api_client - INFO - Excel工作簿已关闭
+2026-06-17 02:26:59 - api_client - INFO - API客户端初始化完成
+2026-06-17 02:26:59 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users?page=1&limit=5
+2026-06-17 02:27:00 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/users/1
+2026-06-17 02:27:00 - api_client - DEBUG - 请求构建完成: POST https://jsonplaceholder.typicode.com/users
+2026-06-17 02:27:01 - api_client - DEBUG - 请求构建完成: PUT https://jsonplaceholder.typicode.com/users/1
+2026-06-17 02:27:01 - api_client - DEBUG - 请求构建完成: GET https://jsonplaceholder.typicode.com/posts
+2026-06-17 02:27:02 - api_client - INFO - API客户端会话已关闭
