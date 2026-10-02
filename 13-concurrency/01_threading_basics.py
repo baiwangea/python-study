@@ -68,26 +68,43 @@ t2.join()
 # ============================================
 
 print("\n【3. Lock - 解决竞态条件】")
+print("  竞态条件说明：")
+print("  - counter += 1 不是原子操作")
+print("  - 实际分为：读取 → 计算 → 写入 三步")
+print("  - 多线程可能在这三步之间交替执行")
+print()
 
-# 3.1 不使用锁的问题
+# 3.1 不使用锁的问题 - 增加复现概率
 counter_no_lock = 0
 
 def increment_no_lock():
     global counter_no_lock
     for _ in range(100000):
+        # 这行代码实际上是三个操作：
+        # 1. temp = counter_no_lock (读取)
+        # 2. temp = temp + 1       (计算)
+        # 3. counter_no_lock = temp (写入)
         counter_no_lock += 1
 
-threads = []
-for _ in range(5):
-    t = threading.Thread(target=increment_no_lock)
-    t.start()
-    threads.append(t)
+print("  运行5次测试，观察是否有数据丢失:")
+for test_num in range(5):
+    counter_no_lock = 0
+    threads = []
+    for _ in range(10):  # 增加到10个线程
+        t = threading.Thread(target=increment_no_lock)
+        t.start()
+        threads.append(t)
 
-for t in threads:
-    t.join()
+    for t in threads:
+        t.join()
 
-print(f"  不使用锁的结果: {counter_no_lock} (期望: 500000)")
-print(f"  数据丢失: {500000 - counter_no_lock}")
+    expected = 1000000  # 10个线程 × 100000
+    lost = expected - counter_no_lock
+    status = "✗ 丢失" if lost > 0 else "✓ 正常"
+    print(f"  测试{test_num + 1}: {counter_no_lock:8d} / {expected} | {status} {lost:6d}")
+
+print("\n  ⚠️  如果所有测试都是1000000，说明运气好没触发竞态")
+print("  ⚠️  多运行几次，或者增加线程数，就会看到数据丢失")
 
 # 3.2 使用锁
 counter_with_lock = 0
