@@ -1,10 +1,49 @@
-# Python 各库入门到精通学习手册 - 总目录
+# Python 学习手册 - 总目录
 
 本手册旨在系统性学习 Python 各类常用库，覆盖 **入门 → 进阶 → 精通** 的完整路径。  
 每个库都会包含：
 - **入门**：核心概念 & 基本用法  
 - **进阶**：常见模式 & 性能优化  
 - **精通**：源码机制 & 项目实战 Demo  
+
+---
+
+## 🚀 PHP 开发者快速上手指南
+
+如果你是**十年 PHP 开发者**，想要快速掌握 Python，请从这里开始：
+
+### 必读文档
+1. **[PHP → Python 快速上手指南](00-docs/php_to_python_guide.md)** ⭐
+   - PHP 和 Python 语法对比
+   - 关键差异点详解
+   - 思维方式转换
+   - 常见陷阱避坑
+
+2. **[PHP ↔ Python 速查表](00-docs/php_python_cheatsheet.md)** ⭐
+   - 语法快速对照
+   - 函数映射表
+   - 代码片段对比
+   - 随时查阅参考
+
+3. **[30天学习计划](00-docs/30_day_learning_plan.md)** ⭐
+   - 结构化学习路径
+   - 每日任务清单
+   - 实战项目指导
+   - 循序渐进掌握
+
+### 基础参考文档
+- [Python 数据类型详解](00-docs/python_data_types.markdown)
+- [Python 函数与面向对象](00-docs/python_functions_classes_oop.markdown)
+- [Git 提交规范](00-docs/git-commit-guidelines.md)
+- [Conda 环境管理](00-docs/conda_env_manual.md)
+
+### 推荐学习顺序
+```
+第1周  → 基础语法 + 数据结构 + 文件操作
+第2周  → 异步编程 + CLI工具 + 函数式编程
+第3周  → FastAPI Web开发 + 数据库 + 队列
+第4周  → 爬虫实战 + 性能优化 + 综合项目
+```
 
 ---
 
