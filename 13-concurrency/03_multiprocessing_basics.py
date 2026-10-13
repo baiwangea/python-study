@@ -8,9 +8,8 @@ import multiprocessing
 import time
 import os
 
-print("=" * 60)
-print("多进程基础示例")
-print("=" * 60)
+# 注意：spawn 模式下子进程会重新 import 本文件，
+# 所以横幅/提示必须放在 if __name__ == '__main__' 里，否则每个子进程都会打印一遍
 
 # ============================================
 # 1. 基本进程创建
@@ -24,6 +23,9 @@ def worker(name, delay):
     print(f"  Process {name} (PID: {pid}) 执行完毕")
 
 if __name__ == '__main__':
+    print("=" * 60)
+    print("多进程基础示例")
+    print("=" * 60)
     print("\n【1. 基本进程创建】")
     print(f"  主进程 PID: {os.getpid()}")
     
@@ -72,27 +74,28 @@ if __name__ == '__main__':
 # 3. 进程间通信 - Queue
 # ============================================
 
-def producer(queue, name, count):
+def producer(task_queue, name, count):
     """生产者进程"""
     pid = os.getpid()
     for i in range(count):
         item = f"{name}-Item-{i}"
-        queue.put(item)
+        task_queue.put(item)
         print(f"  Producer {name} (PID: {pid}) 生产: {item}")
         time.sleep(0.2)
     print(f"  Producer {name} 完成")
 
-def consumer(queue, name):
+def consumer(task_queue, name):
     """消费者进程"""
     pid = os.getpid()
     while True:
         try:
-            item = queue.get(timeout=2)
+            item = task_queue.get(timeout=2)
             if item is None:  # 结束信号
                 break
             print(f"  Consumer {name} (PID: {pid}) 消费: {item}")
             time.sleep(0.3)
-        except:
+        except queue.Empty:
+            # 只捕获超时；裸 except 会把 KeyboardInterrupt、程序 bug 一起吞掉
             break
     print(f"  Consumer {name} 退出")
 
@@ -166,6 +169,12 @@ if __name__ == '__main__':
     
     p1.start()
     p2.start()
+    
+    # 关键：父进程要把自己手里这两端都关掉。
+    # 只要父进程还持有写端，receiver 就永远等不到 EOF，
+    # 于是 p2.join() 会永久挂住（Pipe 最常见的死锁点）
+    parent_conn.close()
+    child_conn.close()
     
     p1.join()
     p2.join()
@@ -331,12 +340,14 @@ if __name__ == '__main__':
     print(f"    耗时: {parallel_time:.2f}s")
     print(f"    加速比: {serial_time / parallel_time:.2f}x")
 
-print("\n" + "=" * 60)
-print("多进程基础示例完成")
-print("=" * 60)
-print("\n提示：")
-print("  1. 进程独立内存空间，不受GIL限制")
-print("  2. Queue 和 Pipe 用于进程间通信")
-print("  3. Value 和 Array 用于共享内存")
-print("  4. 多进程适合CPU密集型任务")
-print("  5. 必须在 if __name__ == '__main__' 中创建进程")
+if __name__ == '__main__':
+    print("\n" + "=" * 60)
+    print("多进程基础示例完成")
+    print("=" * 60)
+    print("\n提示：")
+    print("  1. 进程独立内存空间，不受GIL限制")
+    print("  2. Queue 和 Pipe 用于进程间通信")
+    print("  3. Value 和 Array 用于共享内存")
+    print("  4. 多进程适合CPU密集型任务")
+    print("  5. 必须在 if __name__ == '__main__' 中创建进程")
+    print("  6. Pipe 用完必须关掉父进程自己持有的两端，否则接收方等不到 EOF")

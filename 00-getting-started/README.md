@@ -4,8 +4,8 @@
 5分钟快速体验 Python，对比 PHP 理解核心差异。
 
 ## 📁 文件说明
-- `hello_python.py` - 核心语法对比示例
-- `practice_exercises.py` - 练习题（待完成）
+- `hello_python.py` - 核心语法对比示例（直接运行看输出）
+- `practice_exercises.py` - 13 道练习题 + **自动判分器**，实现一题跑一次即可自查
 
 ## 🚀 快速开始
 
@@ -30,13 +30,21 @@ python3 hello_python.py
 - ✅ 装饰器
 - ✅ 生成器
 
+### 4. 做练习并自动判分
+```bash
+python3 practice_exercises.py
+```
+把每个函数里的 `raise NotImplementedError` 换成你的实现，**每改一题就跑一次**，
+判分器会打印 `✓ 通过 / ✗ 结果不符 / · 未实现`。全部 13 题绿了再看文末的参考答案。
+
 ## 📚 接下来做什么？
 
 ### 新手路径
-1. ✅ 运行 `hello_python.py` 
-2. 📖 阅读 `00-docs/php_python_cheatsheet.md`（速查表）
-3. 📖 阅读 `00-docs/php_to_python_guide.md`（完整指南）
-4. 📅 跟随 `00-docs/30_day_learning_plan.md`（30天计划）
+1. ✅ 运行 `hello_python.py`
+2. ✍️ 做完 `practice_exercises.py`（13 题，跑一次就知道过没过）
+3. 📖 阅读 `00-docs/php_python_cheatsheet.md`（速查表）
+4. 📖 阅读 `00-docs/php_to_python_guide.md`（完整指南）
+5. 📅 跟随 `00-docs/30_day_learning_plan.md`（30天计划）
 
 ### 快速实战
 直接跳到现有项目：
@@ -88,26 +96,25 @@ def make_sound(animal):
 | `null` | `None` | 空值 |
 | `true` / `false` | `True` / `False` | 布尔 |
 
-## 🎓 练习题
+## 🎓 练习题（`practice_exercises.py`，13 题）
 
-完成 `practice_exercises.py` 中的练习：
+| # | 题目 | 考点 | PHP 里你熟悉的写法 |
+|---|------|------|-------------------|
+| 1.1 | `parse_csv_numbers` | split + 列表推导式 | `array_map('intval', explode())` |
+| 1.2 | `sum_csv_numbers` | 内置聚合 | `array_sum()` |
+| 1.3 | `safe_get` | 嵌套字典、`*args`、关键字默认值 | 多级 `??` |
+| 1.4 | `merge_defaults` | `{**a, **b}` 与「不可修改入参」 | `$config += $defaults` |
+| 2.1 | `fizzbuzz` | 控制流、f-string | 经典 if/elseif |
+| 2.2 | `group_by` | `defaultdict`、传函数作参数 | `array_reduce` / Laravel `groupBy` |
+| 2.3 | `top_n` | `sorted(key=)` 元组排序 | `usort` 自定义比较 |
+| 3.1 | `calculator` | `*numbers` 可变参数、`reduce` | 可变参数 + 分发 |
+| 3.2 | `apply_if` | 一等函数、短路 | early return 链 |
+| 3.3 | `memoize` | **手写装饰器** + `functools.wraps` | 闭包缓存 / 静态变量 |
+| 4.1 | `Counter` | `__str__` / `__eq__` / `NotImplemented` | `__toString` |
+| 4.2 | `Account` | `@property`、`@classmethod`、自定义异常 | 构造器 + 静态方法 |
+| 4.3 | `Animal/Dog/Cat` | 继承与多态 | `abstract class` / `interface` |
 
-1. **变量和类型转换**
-   - 字符串转整数
-   - 列表操作
-   - 字典操作
-
-2. **控制流**
-   - FizzBuzz 问题
-   - 循环遍历
-
-3. **函数**
-   - 计算器函数
-   - 可变参数
-
-4. **类**
-   - 创建一个简单的类
-   - 使用继承
+判分器只调用公开函数、不检查写法，一题可以有多种解法。
 
 ## 📖 参考资源
 

@@ -1,0 +1,5 @@
+# 13-concurrency 目录依赖
+# 01/02/03/04/05/08 只用标准库，无需安装
+# 06_asyncio_advanced.py 需要以下两个：
+aiohttp>=3.9
+requests>=2.31
